@@ -1,0 +1,12 @@
+.myBody{
+    background-color: thistle;
+}
+
+.myHeader{
+    color: #fff;
+    z-index: 1;
+}
+
+.myCard{
+background-color: tomato;
+}
