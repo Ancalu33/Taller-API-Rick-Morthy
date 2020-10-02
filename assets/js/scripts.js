@@ -7,7 +7,7 @@ const getData = (api) => {
     return fetch(api)
         .then((response) => response.json())
         .then((json) => {
-            llenarDatos(json);
+            llenarDatos(json), paginacion(json.info);
         })
         .catch((error) => {
             console.log("Error :", error)
@@ -30,7 +30,35 @@ const llenarDatos = (data) => {
         html += '</div>';
 
     });
-    document.getElementById('datosPersonajes').innerHTML=html;
+    document.getElementById('datosPersonajes').innerHTML = html;
+}
+
+//    paginacion
+
+const paginacion = (info) => {
+ 
+    let prevDisabled = "";
+    let nextDisabled = "";
+
+    if (info.prev == null) {
+        prevDisabled = "disabled";
+    } else {
+        prevDisabled = "";
+    }
+
+    if (info.next == null) {
+        nextDisabled = "disabled";
+    } else {
+        nextDisabled = "";
+    }
+
+ 
+    let html = "";
+    html += `<li class="page-item ${prevDisabled}"><a class="page-link" onclick="getData('${info.prev}')">Previous</a></li>`
+    html += `<li class="page-item ${nextDisabled}"><a class="page-link" onclick="getData('${info.next}')">Next</a></li>`
+    document.getElementById('paginacion').innerHTML = html;
+
+
 }
 
 getData(API);
